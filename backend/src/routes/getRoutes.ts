@@ -13,4 +13,51 @@ router.get("/menu", async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try {
+        const data= [
+            {
+                id:1,
+                name: 'Alhena Tuden',
+                role: "Product Owner",
+                salary: 20000
+            },
+            {
+                id:2,
+                name: 'Regine Teresa',
+                role: "Developer",
+                salary: 50000
+            },
+            {
+                id:3,
+                name: 'Cass Hadeyn',
+                role: "Data Analyst",
+                salary: 90000
+            },
+            {
+                id:4,
+                name: 'Xiaotong Krys',
+                role: "DevOp",
+                salary: 10000
+            },
+            {
+                id:5,
+                name: 'Elmore Sly',
+                role: "Data Engineer",
+                salary: 100000
+            },
+            {
+                id:6,
+                name: 'Roafter Juan',
+                role: "Data Engineer",
+                salary: 100000
+            },
+        ] 
+        res.json(data)
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch menu" });
+    }
+});
+
+
 export default router;
