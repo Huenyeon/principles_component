@@ -23,7 +23,7 @@ function Tabular({senior, junior}: TableProps){
                 </ul>
             </div>
             <div className="px-10">
-                <h3 className="text-white pb-10"> JUNIOR LEVEL</h3>
+                <h3 className="text-white pb-10"> ENTRY LEVEL</h3>
                 <ul key={junior.id}>
                     {junior.map((employee: any) => (
                         <li className="text-white flex justify-center" key={employee.id}>{employee}</li>
