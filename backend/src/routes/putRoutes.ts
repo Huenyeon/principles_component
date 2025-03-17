@@ -23,4 +23,52 @@ router.put("/menu/:id", async (req, res) => {
     }
 });
 
+router.put("/dataCard/:lastName/:firstName", async (req, res) => {
+    const { lastName, firstName } = req.params;
+    const updatedData = req.body;
+
+    console.log("Received PUT request:");
+    console.log("Params:", { lastName, firstName });
+    console.log("Body:", updatedData);
+
+
+    if (!lastName || !firstName) {
+        console.error("Missing lastName or firstName in URL");
+        res.status(400).json({ error: "Missing lastName or firstName in URL" });
+        return
+    }
+
+
+    if (!updatedData || Object.keys(updatedData).length === 0) {
+        console.error("Missing or empty body in PUT request");
+        res.status(400).json({ error: "Missing or empty request body" });
+        return
+    }
+
+    if (updatedData.expectedDefense) {
+        updatedData.expectedDefense = new Date(updatedData.expectedDefense).toISOString();
+    }
+
+
+    const { data, error } = await supabase
+        .from("FORM")
+        .update(updatedData) 
+        .match({ lastName, firstName });
+
+    if (error) {
+        console.error("Update Error:", error);
+        res.status(400).json({ error: error.message });
+        return
+    }
+
+    console.log("Update successful:", data);
+    res.json({ message: "Update successful", data });
+});
+
+
+
+// router.put("/cardDetails", async(req,res)=> {
+//     const {groupName}
+// })
+
 export default router;

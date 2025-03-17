@@ -49,4 +49,29 @@ router.post("/users", async (req, res) => {
   }
 });
 
+router.post("/formDetails", async(req,res)=> {
+  console.log(req.body)
+  try{
+    const {firstName, lastName, groupName, role, expectedSalary, expectedDefense } = req.body
+    
+    if (!firstName|| !lastName||!groupName||!role||!expectedSalary||!expectedDefense){
+      throw Error("Staph");
+      
+      
+    }
+    const {data, error} = await supabase.from("FORM").insert({firstName, lastName, groupName, role, expectedSalary, expectedDefense: new Date(expectedDefense)})
+    if (error) {
+      throw error;
+    }
+
+    res.status(200).json({ message: "User added!", data });
+  }
+  catch (error){
+
+    console.error("Oh no, something went wrong", error)
+    res.status(500).json({error})
+
+  }
+})
+
 export default router;
