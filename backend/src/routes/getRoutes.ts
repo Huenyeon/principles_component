@@ -73,4 +73,10 @@ router.get("/formDetails", async(req,res)=> {
     }
 })
 
+router.get('/employees', async (req, res) => {
+    const { data, error } = await supabase.from('EMPLOYEES').select('*');
+    if (error)  res.status(500).json({ error: error.message });
+    res.json(data);
+  });
+
 export default router;

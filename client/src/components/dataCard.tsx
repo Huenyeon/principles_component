@@ -11,7 +11,7 @@ function DataCard() {
     const [formData, setFormData] = useState<Partial<formDetails>>({});
 
     const fetchDetails = async () => {
-        const response = await fetch("http://localhost:5002/api/get/formDetails");
+        const response = await fetch(`http://localhost:5003/api/get/formDetails`);
         if (!response.ok) throw new Error("Failed to fetch data");
         return await response.json();
     };
@@ -26,7 +26,7 @@ function DataCard() {
                 return;
             }
         
-            const url = `http://localhost:5002/api/put/dataCard/${data.lastName}/${data.firstName}`;
+            const url = `http://localhost:5003/api/put/dataCard/${data.lastName}/${data.firstName}`;
         
             console.log(`Request URL: ${url}`);
             console.log("Request Body:", JSON.stringify(data));
@@ -60,7 +60,7 @@ function DataCard() {
 
     const deleteDataCard = useMutation({
         mutationFn: async ({ lastName, firstName }: { lastName: string; firstName: string }) => {
-            const response = await fetch(`http://localhost:5002/api/delete/dataCard/${lastName}/${firstName}`, {
+            const response = await fetch(`http://localhost:5003/api/delete/dataCard/${lastName}/${firstName}`, {
                 method: "DELETE"
             });
             if (!response.ok) throw new Error("Failed to delete data");

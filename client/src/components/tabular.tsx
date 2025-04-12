@@ -1,36 +1,67 @@
-type TableProps = {
-    senior?: any;
-    junior?: any,
-
-
-}
-
-// type Employee = {
-//     id: number,
-//     name: string,
-//     role: string,
-//     salary: number,
-// }
-function Tabular({senior, junior}: TableProps){
-    return(
-        <div className="flex flex-row p-10">
-            <div className="px-10">
-                <h3 className="text-white pb-10"> SENIOR LEVEL</h3>
-                <ul>
-                    {senior.map((employee: any) => (
-                        <li  className="text-white flex justify-center" key={employee.id}>{employee}</li>
-                    ))}
-                </ul>
-            </div>
-            <div className="px-10">
-                <h3 className="text-white pb-10"> ENTRY LEVEL</h3>
-                <ul key={junior.id}>
-                    {junior.map((employee: any) => (
-                        <li className="text-white flex justify-center" key={employee.id}>{employee}</li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    )
-}
-export default Tabular;
+// Employee type to be used in both components
+type Employee = {
+    name: string;
+    salary: number;
+  };
+  
+  // Tabular component to display all employees in tables
+  type TableProps = {
+    employees: Employee[];
+    filter?: 'senior' | 'entry' | null;
+  };
+  
+  export default function Tabular({ employees, filter }: TableProps) {
+    // Filter employees based on salary if filter is applied
+    const seniorEmployees = employees.filter(emp => emp.salary >= 50000);
+    const entryEmployees = employees.filter(emp => emp.salary < 50000);
+  
+    return (
+      <div className="flex flex-row gap-10 p-6">
+        {/* Show Senior table only if no filter or filter is 'senior' */}
+        {(filter === null || filter === 'senior') && (
+          <div>
+            <h3 className="text-white pb-4 text-xl font-bold">SENIOR LEVEL</h3>
+            <table className="text-white border-collapse border border-gray-500">
+              <thead>
+                <tr>
+                  <th className="border border-gray-500 p-2">Name</th>
+                  <th className="border border-gray-500 p-2">Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                {seniorEmployees.map((emp, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-500 p-2">{emp.name}</td>
+                    <td className="border border-gray-500 p-2">${emp.salary.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+  
+        {/* Show Entry table only if no filter or filter is 'entry' */}
+        {(filter === null || filter === 'entry') && (
+          <div>
+            <h3 className="text-white pb-4 text-xl font-bold">ENTRY LEVEL</h3>
+            <table className="text-white border-collapse border border-gray-500">
+              <thead>
+                <tr>
+                  <th className="border border-gray-500 p-2">Name</th>
+                  <th className="border border-gray-500 p-2">Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                {entryEmployees.map((emp, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-500 p-2">{emp.name}</td>
+                    <td className="border border-gray-500 p-2">${emp.salary.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  }

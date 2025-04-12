@@ -9,7 +9,7 @@ import deleteRoutes from './routes/deleteRoutes';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());

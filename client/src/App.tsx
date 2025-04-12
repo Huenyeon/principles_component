@@ -21,7 +21,7 @@ function App() {
       return
     }
 
-    const response = await fetch("http://localhost:5000/api/post/users", {
+    const response = await fetch("http://localhost:5003/api/post/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ function App() {
               onClick={() => {
                 submit();
               }}
-              className="text-white"
+              className="text-black"
             >
               Submit
             </ButtonComponent>

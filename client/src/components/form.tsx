@@ -16,7 +16,7 @@ function Form() {
     const [expectedDefense, setexpectedDefense] = useState(new Date())
     const mutation = useMutation({
         mutationFn: async({firstName, lastName, groupName, role,expectedDefense,expectedSalary }: formDetails)=> {
-            const response = await fetch("http://localhost:5002/api/post/formDetails", {
+            const response = await fetch("http://localhost:5003/api/post/formDetails", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
