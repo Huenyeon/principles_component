@@ -59,5 +59,18 @@ router.get("/all", async (req, res) => {
     }
 });
 
+router.get("/formDetails", async(req,res)=> {
+    try{
+        const {data, error} = await supabase.from("FORM").select("*") 
+        if (error){
+            throw error
+        }
+        res.json(data)
+
+    }catch(error){
+        console.error(error)
+        res.status(500).json({error: "Failed to fetch details"})
+    }
+})
 
 export default router;
