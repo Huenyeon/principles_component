@@ -12,4 +12,4 @@ export function ButtonComponent({ onClick, children, ...props }: CustomButtonPro
       {children}
     </Button>
   );
-}
+} 
