@@ -8,7 +8,6 @@ import EMS from "./Ems";
 import Activity from "./Activity";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Midterm } from "./Midterms.tsx";
 
 
 const queryClient = new QueryClient();
@@ -18,8 +17,7 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <MantineProvider>
-        {/* <Activity /> */}
-        {/* <Midterm/> */}
+        <Activity />
         {/* <App/> */}
         {/* <EMS/> */}
       </MantineProvider>
