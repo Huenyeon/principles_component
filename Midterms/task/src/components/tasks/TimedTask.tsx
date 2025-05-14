@@ -100,51 +100,56 @@ export function TimedTask({ task }: TimedTaskProps) {
   }
 
   return (
-    <Card className={`${task.completed ? "bg-muted/50" : ""}`}>
-      <CardContent className="p-4">
-        <div className="flex items-start gap-3">
-          <Checkbox checked={task.completed} onCheckedChange={handleToggleComplete} className="mt-1" />
+    <Card className={`${task.completed ? "bg-muted/50" : "bg-white shadow-lg rounded-lg"}`}>
+      <CardContent className="p-6 bg-[#FFC5A6]/50">
+        <div className="flex items-start gap-4">
+          <Checkbox
+            checked={task.completed}
+            onCheckedChange={handleToggleComplete}
+            className="mt-1"
+          />
 
           <div className="flex-1">
             {isEditing ? (
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <Input
                   value={editedTitle}
                   onChange={(e) => setEditedTitle(e.target.value)}
                   placeholder="Task title"
-                  className="font-medium"
+                  className="font-semibold text-lg"
                 />
                 <Input
                   value={editedDescription}
                   onChange={(e) => setEditedDescription(e.target.value)}
                   placeholder="Task description (optional)"
+                  className="text-sm"
                 />
               </div>
             ) : (
               <>
-                <h3 className={`font-medium ${task.completed ? "line-through text-muted-foreground" : ""}`}>
+                <h3 className={`text-2xl font-medium ${task.completed ? "line-through text-gray-400" : ""}`}>
                   {task.title}
                 </h3>
                 {task.description && (
                   <p
-                    className={`text-sm mt-1 ${task.completed ? "line-through text-muted-foreground" : "text-muted-foreground"}`}
+                    className={`text-sm mt-2 ${task.completed ? "line-through text-gray-400" : "text-gray-600"}`}
                   >
                     {task.description}
                   </p>
                 )}
 
                 {task.dueDate && (
-                  <div className="mt-3 space-y-1">
-                    <div className="flex items-center gap-2">
-                      <Timer className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground">Due: {formatDate(task.dueDate)}</span>
+                  <div className="mt-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <Timer className="h-4 w-4" />
+                      <span>Due: {formatDate(task.dueDate)}</span>
                     </div>
 
                     {timeRemaining !== null && !task.completed && (
                       <>
-                        <Progress value={progressPercent} className="h-2" />
+                        <Progress value={progressPercent} className="h-2 bg-blue-500 rounded" />
                         <p
-                          className={`text-xs font-medium ${timeRemaining <= 0 ? "text-red-500" : "text-muted-foreground"}`}
+                          className={`text-xs mt-1 font-medium ${timeRemaining <= 0 ? "text-red-600" : "text-gray-500"}`}
                         >
                           {formatTimeRemaining(timeRemaining)}
                         </p>
@@ -158,14 +163,14 @@ export function TimedTask({ task }: TimedTaskProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="px-4 py-2 flex justify-end gap-2 border-t">
+      <CardFooter className="px-4 py-3 flex justify-end gap-3 border-t">
         {isEditing ? (
           <>
             <Button size="sm" variant="ghost" onClick={() => setIsEditing(false)}>
-              <X className="h-4 w-4 mr-1" /> Cancel
+              <X className="h-4 w-4 mr-2" /> Cancel
             </Button>
             <Button size="sm" variant="default" onClick={handleSaveEdit}>
-              <Save className="h-4 w-4 mr-1" /> Save
+              <Save className="h-4 w-4 mr-2" /> Save
             </Button>
           </>
         ) : (
@@ -173,7 +178,7 @@ export function TimedTask({ task }: TimedTaskProps) {
             <Button size="sm" variant="ghost" onClick={() => setIsEditing(true)}>
               <Edit className="h-4 w-4" />
             </Button>
-            <Button size="sm" variant="ghost" className="text-red-500" onClick={handleRemove}>
+            <Button size="sm" variant="ghost" className="text-red-600" onClick={handleRemove}>
               <Trash2 className="h-4 w-4" />
             </Button>
           </>
